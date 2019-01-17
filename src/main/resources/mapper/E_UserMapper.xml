@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.E_UserMapper">
+
+    <select id="getAll" resultType="entity.E_User" parameterType="entity.E_User">
+        SELECT u.`euid`,u.`euname`,u.`eunumber`,
+        u.`eupassword`,u.`eusex`,u.`eucardno`,
+        u.`euadress`,u.`eubirthplace`,u.`eubirthday`,
+        u.`euducation`,u.`eustatrtime`,u.`euendtime`,j.`ujname`
+        FROM e_user u JOIN u_jurisdiction j ON u.`euposition`=j.`ujid`;
+    </select>
+
+    <select id="getInfoById" resultType="entity.E_User" parameterType="java.lang.Integer">
+        select * from  e_user where euid=#{euid}
+    </select>
+
+    <insert id="add" parameterType="entity.E_User">
+        INSERT INTO e_user VALUES (DEFAULT,#{euname},#{eunumber},
+        #{eupassword},#{eusex},#{eucardno},#{euadress},#{eubirtplace},#{eubirthday},#{euducation},
+        now(),null,2)
+    </insert>
+
+    <update id="update" parameterType="entity.E_User">
+        update e_user set euname=#{euname},eunumber=#{eunumber},eupassword=#{eupassword},eusex=#{eusex},
+        eucardno=#{eucardno},euadress=#{euadress},eubirthplace=#{eubirthplace},euducation=#{euducation},
+        eustarttime=#{eustarttime},euendtime=#{euendtime},euposition=#{euposition} where euid=#{euid}
+    </update>
+
+    <delete id="del" parameterType="int" >
+        delete from e_user where euid=#{euid}
+    </delete>
+
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.U_JurisdictionMapper">
+    <select id="getAll" resultType="entity.U_Jurisdiction" parameterType="entity.U_Jurisdiction">
+        select  * from u_jurisdiction
+    </select>
+    <select id="getInfoByid" resultType="entity.U_Jurisdiction" parameterType="java.lang.Integer">
+        select * from u_jurisdiction where ujid=#{ujid}
+    </select>
+    <insert id="add" parameterType="entity.U_Jurisdiction">
+        insert into u_jurisdiction values(default,#{ujname})
+    </insert>
+    <update id="update" parameterType="entity.U_Jurisdiction">
+        update  u_jurisdiction set ujname=#{ujname} where ujid=#{ujid}
+    </update>
+    <delete id="del" parameterType="int">
+DELETE FROM u_jurisdiction WHERE ujid=#{ujid};
+    </delete>
+</mapper>
